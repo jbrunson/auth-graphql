@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = mongoose.model('user');
 
 // SerializeUser is used to provide some identifying token that can be saved
-// in the users session.  We traditionally use the 'ID' for this.
+// in the users session.  Usually the ID.
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -46,7 +46,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
 // provided to the 'req.logIn' function.  This is apart of Passport JS.
 // Notice the Promise created in the second 'then' statement.  This is done
 // because Passport only supports callbacks, while GraphQL only supports promises
-// for async code!  Awkward!
+// for async code.
 function signup({ email, password, req }) {
   const user = new User({ email, password });
   if (!email || !password) { throw new Error('You must provide an email and password.'); }
